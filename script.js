@@ -18,9 +18,9 @@ function setMonogram(selector, accentTag) {
   const accent = document.createElement(accentTag);
   accent.textContent = '&';
   element.replaceChildren(
-    document.createTextNode(data.couple.first.charAt(0).toUpperCase()),
+    document.createTextNode(data.couple.first + ' '),
     accent,
-    document.createTextNode(data.couple.second.charAt(0).toUpperCase())
+    document.createTextNode(' ' + data.couple.second)
   );
 }
 
@@ -56,7 +56,7 @@ function renderInvitation(language = currentLanguage) {
   const formatted = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(date);
   const weekday = new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(date);
   const [year, month, day] = event.date.split('-');
-  const names = couple.first.charAt(0).toUpperCase() + '&' + couple.second.charAt(0).toUpperCase();
+  const names = couple.first + ' & ' + couple.second;
 
   document.documentElement.lang = language;
   document.documentElement.dir = language === 'ku' ? 'rtl' : 'ltr';
@@ -110,7 +110,7 @@ function renderInvitation(language = currentLanguage) {
   ['.story-ornament', '.footer-mark'].forEach((selector) => setMonogram(selector, 'i'));
   setMonogram('.brand-mark', 'span');
   select('.brand-mark').setAttribute('aria-label', names + copy.backToTop);
-  select('.hero-side-note').textContent = couple.first.charAt(0).toUpperCase() + '&' + couple.second.charAt(0).toUpperCase() + ' / ' + year;
+  select('.hero-side-note').textContent = names + ' / ' + year;
   const heroCaption = select('.hero-top-caption');
   const captionDate = document.createElement('bdi');
   captionDate.dir = 'ltr';
